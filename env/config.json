@@ -1,6 +1,11 @@
 {
   "proxy": {
-    "countries": ["Mexico", "China"]
+    "with_proxy": true,
+    "countries": [
+      "Brazil",
+      "Canada",
+      "Germany"
+    ]
   },
   "faucet": {
     "url": "https://www.freenanofaucet.com/"
@@ -10,10 +15,6 @@
       {
         "name": "Carteira 01",
         "address": "nano_3wyy9xq54an4thpockyzr5xy7hzy8mfwye4yhp1fsi64o7nkg5md9sjrkc53"
-      },
-      {
-        "name": "Carteira 02",
-        "address": "nano_3yqs7iumiahhnfdqoihmr1hwk337t65kx43mj6ht1h39thanj7jh6zmf9yr7"
       }
     ]
   }

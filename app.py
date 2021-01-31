@@ -24,8 +24,8 @@ def job():
                              get_config("faucet"), \
                              get_config("proxy")
 
-    bot = FreeNanoFaucetBot(faucet, wallets, proxy, with_proxy=False)
-    bot.exec()
+    bot = FreeNanoFaucetBot(faucet, wallets, proxy, with_proxy=get_config('proxy').with_proxy)
+    bot.run()
     bot.teardown()
 
 

@@ -1,3 +1,5 @@
+import random
+
 from http_request_randomizer.requests.proxy.requestProxy import RequestProxy
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -26,21 +28,26 @@ class FreeNanoFaucetBot:
     def setup_proxy(self, with_proxy, countries):
         if with_proxy:
             proxies = RequestProxy().get_proxy_list()
-            filtered_proxies = list(filter(lambda x: x.country in countries, proxies))
-            current_proxy = filtered_proxies[0].get_address()
-            webdriver.DesiredCapabilities.CHROME['proxy'] = {
-                "httpProxy": current_proxy,
-                "ftpProxy": current_proxy,
-                "sslProxy": current_proxy,
-                "proxyType": "MANUAL",
-            }
+            selected_proxy = random.choice(proxies)
+            current_proxy = selected_proxy.get_address()
+            if not countries[0] == "*":
+                filtered_proxies = list(filter(lambda x: x.country in countries, proxies))
+                selected_proxy = random.choice(filtered_proxies)
+                current_proxy = selected_proxy.get_address()
+            print(f'Selected Proxy at {selected_proxy.country} with IP {selected_proxy.ip}')
+
+        webdriver.DesiredCapabilities.CHROME['proxy'] = {
+            "httpProxy": current_proxy,
+            "ftpProxy": current_proxy,
+            "sslProxy": current_proxy,
+            "proxyType": "MANUAL",
+        }
 
     def teardown(self):
         self.driver.close()
 
-    def exec(self):
+    def run(self):
         self.driver.get(self.faucet.url)
-        self.driver.set_window_size(1280, 1001)
         self.driver.find_element(By.ID, "nanoAddr") \
             .send_keys(self.wallets.data[1]['address'])
         self.driver.find_element(By.ID, "getNano").click()
