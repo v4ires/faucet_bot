@@ -49,7 +49,7 @@ class FreeNanoFaucetBot:
     def run(self):
         self.driver.get(self.faucet.url)
         self.driver.find_element(By.ID, "nanoAddr") \
-            .send_keys(self.wallets.data[1]['address'])
+            .send_keys(self.wallets.data[0]['address'])
         self.driver.find_element(By.ID, "getNano").click()
 
         p_element = WebDriverWait(self.driver, 10) \
