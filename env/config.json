@@ -1,6 +1,6 @@
 {
   "proxy": {
-    "with_proxy": true,
+    "with_proxy": false,
     "countries": [
       "Brazil",
       "Canada",

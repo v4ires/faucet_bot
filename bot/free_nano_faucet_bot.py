@@ -34,14 +34,14 @@ class FreeNanoFaucetBot:
                 filtered_proxies = list(filter(lambda x: x.country in countries, proxies))
                 selected_proxy = random.choice(filtered_proxies)
                 current_proxy = selected_proxy.get_address()
-            print(f'Selected Proxy at {selected_proxy.country} with IP {selected_proxy.ip}')
 
-        webdriver.DesiredCapabilities.CHROME['proxy'] = {
-            "httpProxy": current_proxy,
-            "ftpProxy": current_proxy,
-            "sslProxy": current_proxy,
-            "proxyType": "MANUAL",
-        }
+            webdriver.DesiredCapabilities.CHROME['proxy'] = {
+                "httpProxy": current_proxy,
+                "ftpProxy": current_proxy,
+                "sslProxy": current_proxy,
+                "proxyType": "MANUAL",
+            }
+            print(f'Selected Proxy at {selected_proxy.country} with IP {selected_proxy.ip}')
 
     def teardown(self):
         self.driver.close()
