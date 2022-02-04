@@ -3,9 +3,9 @@ import random
 import time
 
 from bot.free_nano_faucet_bot import FreeNanoFaucetBot
-from env.config import Config
+from venv.config import Config
 
-CONFIG_PATH = 'env/config.json'
+CONFIG_PATH = 'venv/config.json'
 
 
 def get_config(env):
@@ -20,11 +20,8 @@ def show_start_log():
 
 def job():
     show_start_log()
-    wallets, faucet, proxy = get_config("wallets"), \
-                             get_config("faucet"), \
-                             get_config("proxy")
-
-    bot = FreeNanoFaucetBot(faucet, wallets, proxy, with_proxy=get_config('proxy').with_proxy)
+    wallets, faucet = get_config("wallets"), get_config("faucet")
+    bot = FreeNanoFaucetBot(faucet, wallets)
     bot.run()
     bot.teardown()
 
